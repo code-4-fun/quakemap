@@ -12,7 +12,6 @@ angular.module('geoLocateModule')
                   // Set the latitude and longitude equal to the HTML5 coordinates
                   $scope.current.longitude = parseFloat(coords.long).toFixed(3);
                   $scope.current.latitude = parseFloat(coords.lat).toFixed(3);
-                  console.log('Current Location:', $scope.current);
                 }
             );
       }]

@@ -29,7 +29,13 @@
             refresh='isMapReady' options='options'>
             <ui-gmap-markers
                   models="markers" coords="'self'"
-                  idkey='id' icon='icon'>
+                  idkey='id' icon='icon' options='options'>
+                  <ui-gmap-windows show="show" options='options'>
+                      <div ng-non-bindable>
+                        {{title}}<br/>
+                        {{content}}
+                      </div>
+                  </ui-gmap-windows>
             </ui-gmap-markers>
       </ui-gmap-google-map>
     </md-content>

@@ -48,22 +48,27 @@ angular.module('mapModule')
         var mapService = {};
         mapService.defaultLocation = { center: { latitude: 45, longitude: -73 }, zoom: zoomLevel};
 
-        var Point = function (id, latitude, longitude, message) {
+        var Point = function (id, latitude, longitude) {
             this.id = id;
             this.latitude = latitude;
             this.longitude = longitude;
-            this.message = message;
             this.icon = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
         };
 
-        mapService.addMarker = function (id, latitude, longitude, message) {
+        mapService.addMarker = function (id, latitude, longitude, title, message) {
             var point = new Point(
                 id,
                 latitude,
-                longitude,
-                message
+                longitude
             );
-            console.log('marker prepared: ', point);
+
+            point.title = '<strong>' + title + '</strong>';
+            point.options = {};
+            point.content = '<ul><li>latitude: ' + latitude + '</li>'
+                                    + '<li>longitude: ' + longitude + '</li>'
+                                    + '</ul>'
+
+            point.options.draggable = false;
             return point;
         };
 
