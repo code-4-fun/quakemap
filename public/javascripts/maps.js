@@ -9,8 +9,8 @@ angular.module('mapModule')
   });
 
 angular.module('mapModule')
-  .controller('mapController', ['$scope', 'mapService', 'uiGmapGoogleMapApi', 'geolocation',
-      function ($scope, mapService, uiGmapGoogleMapApi, geolocation) {
+  .controller('mapController', ['$scope', 'mapService', 'uiGmapGoogleMapApi', 'geolocation', '$http',
+      function ($scope, mapService, uiGmapGoogleMapApi, geolocation, $http) {
 
         $scope.map = {};
         $scope.isMapReady = false;
@@ -18,7 +18,7 @@ angular.module('mapModule')
         $scope.currentLocation = mapService.defaultLocation;
         $scope.options = {scrollwheel: false};
         $scope.markers = [];
-
+        
         uiGmapGoogleMapApi.then(function(maps) {
             $scope.map = maps;
             geolocation.getLocation().then( function ( data ) {
@@ -27,11 +27,11 @@ angular.module('mapModule')
                 $scope.currentLocation.center.latitude = parseFloat(coords.lat).toFixed(3);
                 $scope.isMapReady = true;
                 $scope.markers.push(
-                    mapService.addMarker(
+                    mapService.createMarker(
                           0, $scope.currentLocation.center.latitude, $scope.currentLocation.center.longitude,
                           'Current Location', '', mapService.AlertTypes.INFO
                     )
-                    /* mapService.addMarker(
+                    /* mapService.createMarker(
                         'us20005yci', '36.4518', '-98.7445',
                         'M 2.7 - 31km NW of Fairview, Oklahoma',
                         '31km NW of Fairview, Oklahoma',
@@ -40,6 +40,49 @@ angular.module('mapModule')
                 );
             });
         });
+          
+        loadData('hourly', $scope);
+          
+        function loadData ( period, scope ) {
+            var responseData = [];
+            if ('weekly' === period) {
+                responseData = fetchData('/quake_info/get/week', $scope);
+            } else if ('hourly' === period) {
+                responseData = fetchData('/quake_info/get/hour', $scope);
+            } else if ('daily' === period) {
+                responseData = fetchData('/quake_info/get/day', $scope);
+            }
+            
+            function fetchData(serviceUrl, scope) {
+                $http({
+                    method: 'GET',
+                    url: serviceUrl
+                })
+                .then( 
+                    // success callback
+                    function (response) {
+                        var mark = {};
+                        console.log(scope);
+                        for(var i = 0; i < response.data.length; i++) {
+                            mark = response.data[i];
+                            scope.markers.push(
+                                mapService.createMarker(
+                                    mark.id, mark.latitude, mark.longitude, 
+                                    mark.title, mark.message, mark.severity, 
+                                    mark.duration, mark.magnitude, mark.eventTime
+                                )
+                            );
+                        }
+                        
+                    }, 
+                    // failure callback
+                    function (response) {
+                        return [];
+                    }
+                );
+            };
+        };
+        
       }]);
 
 angular.module('mapModule')
@@ -92,7 +135,7 @@ angular.module('mapModule')
             scope.content = scope.content + '</ul>';
         };
 
-        mapService.addMarker = function (id, latitude, longitude, 
+        mapService.createMarker = function (id, latitude, longitude, 
                                          title, message, severity, 
                                          duration, magnitude, eventTime
                                         ) {
@@ -104,7 +147,7 @@ angular.module('mapModule')
             
             return point;
         };
-
+        
         return mapService;
 
       }]);

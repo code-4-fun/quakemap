@@ -26,23 +26,48 @@ client.registerMethod(
 
 router.get('/quake_info/get/week', function(req, res, next) {
     var data = client.methods.weeklydata(function (data, response) {
-          //console.log('Weekly Data:', data);
-          res.json(data);
+          var respData = module.convertEarthDataToMarkers(data.features);
+          res.json(respData);
       });
 });
 
 router.get('/quake_info/get/day', function(req, res, next) {
     var data = client.methods.dailydata(function (data, response) {
-          //console.log('Daily Data:', data);
-          res.json(data);
+          var respData = module.convertEarthDataToMarkers(data.features);
+          res.json(respData);
       });
 });
 
 router.get('/quake_info/get/hour', function(req, res, next) {
     var data = client.methods.hourlydata(function (data, response) {
-          //console.log('Hourly Data:', data.features);
-          res.json(data.features);
+          var respData = module.convertEarthDataToMarkers(data.features);
+          res.json(respData);
       });
 });
+
+module.convertEarthDataToMarkers = function (data) {
+    if(data) {
+        var markersArr = [];
+        for(var i = 0; i < data.length; i++) {
+            var marker = {};
+            
+            // id, latitude, longitude, title, message, severity, duration, magnitude, eventTime
+            marker.id = data[i].id;
+            marker.latitude = data[i].geometry.coordinates[1];
+            marker.longitude = data[i].geometry.coordinates[0];
+            marker.title = data[i].properties.title;
+            marker.message = data[i].properties.place;
+            marker.severity = (data[i].properties.mag >= 5) ? 'alert' : 'info';
+            marker.duration = data[i].properties.dmin;
+            marker.magnitude = data[i].properties.mag;
+            marker.eventTime = data[i].properties.time;
+            
+            markersArr.push(marker);
+        }
+        return markersArr;
+    }else {
+        return [];
+    }
+};
 
 module.exports = router;
