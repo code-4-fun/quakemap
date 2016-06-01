@@ -113,7 +113,7 @@ angular.module('mapModule')
             scope.severity = severity;
             scope.magnitude = magnitude;
             scope.duration = duration;
-            scope.eventTime = eventTime;
+            scope.eventTime = new Date(eventTime);
             
             scope.options = {};
             scope.options.draggable = false;
