@@ -1,8 +1,8 @@
 angular.module('geoLocateModule', ['mapModule']);
 
 angular.module('geoLocateModule')
-  .controller('geoLocateCtrl', ['$scope', 'geolocation',
-      function ($scope, geolocation) {
+  .controller('geoLocateCtrl', ['$scope', 'geolocation', 'mapService',
+      function ($scope, geolocation, mapService) {
 
         $scope.current = {};
 
@@ -14,5 +14,17 @@ angular.module('geoLocateModule')
                   $scope.current.latitude = parseFloat(coords.lat).toFixed(3);
                 }
             );
+          
+        $scope.duration = 0;
+        $scope.modes = getDurationModes();
+          
+        function getDurationModes() {
+            var modes = [];
+            for(var mode in mapService.DurationModes) {
+                modes.push(mode);
+            }
+            return modes;
+        };
+          
       }]
   );

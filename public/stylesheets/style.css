@@ -9,11 +9,44 @@ a {
 
 .angular-google-map-container {
     padding: 6px;
-    border-width: 1px;
+    border-width: 2px;
     border-style: solid;
     border-color: #ccc #ccc #999 #ccc;
     -webkit-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
     -moz-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
     box-shadow: rgba(64, 64, 64, 0.1) 0 2px 5px;
-    height: 90%;
+    height: 75%;
+    width: 95%;
+}
+
+#id-map-title {
+    color: black;
+    background-color: white;
+}
+
+#id-main-header {
+    color: skyblue;
+    background-color: black;
+    height: 30px;
+}
+
+#id-main-header .md-toolbar-tools {
+    padding-left: 10px;
+}
+
+@font-face {
+  font-family:"icomoon";
+  src:url("https://cdn.rawgit.com/angular/material/master/docs/app/fonts/icomoon.eot");
+  font-weight:normal;
+  font-style:normal;
+}
+@font-face {
+  font-family: 'icomoon';
+  src:url('https://cdn.rawgit.com/angular/material/master/docs/app/fonts/icomoon.eot?-cmq1um');
+  src:url('https://cdn.rawgit.com/angular/material/master/docs/app/fonts/icomoon.eot?#iefix-cmq1um') format('embedded-opentype'),
+  url('https://cdn.rawgit.com/angular/material/master/docs/app/fonts/icomoon.woff?-cmq1um') format('woff'),
+  url('https://cdn.rawgit.com/angular/material/master/docs/app/fonts/icomoon.ttf?-cmq1um') format('truetype'),
+  url('https://cdn.rawgit.com/angular/material/master/docs/app/fonts/icomoon.svg?-cmq1um#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }

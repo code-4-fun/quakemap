@@ -31,25 +31,19 @@ angular.module('mapModule')
                           0, $scope.currentLocation.center.latitude, $scope.currentLocation.center.longitude,
                           'Current Location', '', mapService.AlertTypes.INFO
                     )
-                    /* mapService.createMarker(
-                        'us20005yci', '36.4518', '-98.7445',
-                        'M 2.7 - 31km NW of Fairview, Oklahoma',
-                        '31km NW of Fairview, Oklahoma',
-                        mapService.AlertTypes.ALERT, 0.018, 2.7, new Date(1464312395600)
-                    )*/
                 );
             });
         });
           
-        loadData('hourly', $scope);
+        loadData(mapService.DurationModes.hourly, $scope);
           
         function loadData ( period, scope ) {
             var responseData = [];
-            if ('weekly' === period) {
+            if (mapService.DurationModes.weekly === period) {
                 responseData = fetchData('/quake_info/get/week', $scope);
-            } else if ('hourly' === period) {
+            } else if (mapService.DurationModes.hourly === period) {
                 responseData = fetchData('/quake_info/get/hour', $scope);
-            } else if ('daily' === period) {
+            } else if (mapService.DurationModes.daily === period) {
                 responseData = fetchData('/quake_info/get/day', $scope);
             }
             
@@ -62,7 +56,6 @@ angular.module('mapModule')
                     // success callback
                     function (response) {
                         var mark = {};
-                        console.log(scope);
                         for(var i = 0; i < response.data.length; i++) {
                             mark = response.data[i];
                             scope.markers.push(
@@ -95,9 +88,15 @@ angular.module('mapModule')
         mapService.defaultLocation = { center: { latitude: 45, longitude: -73 }, zoom: zoomLevel};
         
         mapService.AlertTypes = {
-               ALARM: 0,
-               ALERT: 1,
-               INFO: 2
+            ALARM: 0,
+            ALERT: 1,
+            INFO: 2
+        };
+          
+        mapService.DurationModes = {
+            daily: 0,
+            hourly: 1,
+            weekly: 2
         };
 
         var Point = function (id, latitude, longitude,

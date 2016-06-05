@@ -8,36 +8,48 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <link rel="stylesheet" href="/lib/angular-material/angular-material.css" />
   </head>
-  <body data-ng-app="quakemap">
+  <body data-ng-app="quakemap" ng-cloak>
 
     <!-- Navbar -->
-    <md-content>
-      <md-toolbar class='md-primary md-hue-1'>
+    <md-toolbar class='md-primary' id='id-main-header'>
         <div class="md-toolbar-tools">
-          <h3><strong>QuakeMap</strong></h3>
-          <span flex></span>
-          <div data-ng-controller="geoLocateCtrl">
-            <h6>Current Location: {{current}}</h6>
-          </div>
+          <strong>QuakeMap</strong>
         </div>
-      </md-toolbar>
-    </md-content>
-
+    </md-toolbar>
+    
     <md-content data-ng-controller='mapController as map'>
-      <ui-gmap-google-map
-            center='currentLocation.center' zoom='currentLocation.zoom'
-            refresh='isMapReady' options='options'>
-            <ui-gmap-markers
-                  models="markers" coords="'self'"
-                  idkey='id' icon='icon' options='options'>
-                  <ui-gmap-windows show="show">
-                      <div ng-non-bindable>
-                        {{title}}<br/>
-                        {{content}}
-                      </div>
-                  </ui-gmap-windows>
-            </ui-gmap-markers>
-      </ui-gmap-google-map>
+        <section>
+            <md-subheader id='id-map-title'>
+                <div data-ng-controller="geoLocateCtrl" layout>
+                    <span>
+                        Current Location: {{current}}
+                    </span>
+<!--
+                    <span flex></span>
+                    <md-slider
+                               ng-model="duration" step="1" min="0"
+                               max="{{modes.length - 1}}" aria-label='{{modes[duration]}}' >
+                    </md-slider>
+-->
+                </div>
+            </md-subheader>
+            <center>
+                <ui-gmap-google-map
+                    center='currentLocation.center' zoom='currentLocation.zoom'
+                    refresh='isMapReady' options='options'>
+                    <ui-gmap-markers
+                          models="markers" coords="'self'"
+                          idkey='id' icon='icon' options='options'>
+                          <ui-gmap-windows show="show">
+                              <div ng-non-bindable>
+                                {{title}}<br/>
+                                {{content}}
+                              </div>
+                          </ui-gmap-windows>
+                    </ui-gmap-markers>
+                </ui-gmap-google-map>
+            </center>
+        </section>
     </md-content>
 
     <!-- libraries -->
