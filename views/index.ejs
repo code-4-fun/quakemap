@@ -1,0 +1,71 @@
+<html>
+  <head>
+    <title>Earthquake Map</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- styles -->
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/lib/angular-material/angular-material.css" />
+  </head>
+  <body data-ng-app="quakemap" ng-cloak>
+
+    <!-- Navbar -->
+    <md-toolbar class='md-primary' id='id-main-header'>
+        <div class="md-toolbar-tools">
+          <strong>QuakeMap</strong>
+        </div>
+    </md-toolbar>
+    
+    <md-content data-ng-controller='mapController as map'>
+        <section>
+            <md-subheader id='id-map-title'>
+                <div data-ng-controller="geoLocateCtrl" layout>
+                    <span>
+                        Current Location: {{current}}
+                    </span>
+<!--
+                    <span flex></span>
+                    <md-slider
+                               ng-model="duration" step="1" min="0"
+                               max="{{modes.length - 1}}" aria-label='{{modes[duration]}}' >
+                    </md-slider>
+-->
+                </div>
+            </md-subheader>
+            <center>
+                <ui-gmap-google-map
+                    center='currentLocation.center' zoom='currentLocation.zoom'
+                    refresh='isMapReady' options='options'>
+                    <ui-gmap-markers
+                          models="markers" coords="'self'"
+                          idkey='id' icon='icon' options='options'>
+                          <ui-gmap-windows show="show">
+                              <div ng-non-bindable>
+                                {{title}}<br/>
+                                {{content}}
+                              </div>
+                          </ui-gmap-windows>
+                    </ui-gmap-markers>
+                </ui-gmap-google-map>
+            </center>
+        </section>
+    </md-content>
+
+    <!-- libraries -->
+    <script src="/lib/lodash/lodash.js"></script>
+    <script src="/lib/angular/angular.js"></script>
+    <script src="/lib/angular-aria/angular-aria.js"></script>
+    <script src="/lib/angular-animate/angular-animate.js"></script>
+    <script src="/lib/angular-material/angular-material.js"></script>
+    <script src="/lib/angularjs-geolocation/dist/angularjs-geolocation.min.js"></script>
+    <script src="/lib/angular-simple-logger/dist/angular-simple-logger.js"></script>
+    <script src="/lib/angular-google-maps/dist/angular-google-maps.js"></script>
+
+    <!-- app library -->
+    <script src="/javascripts/app.js"></script>
+    <script src="/javascripts/geolocation.js"></script>
+    <script src="/javascripts/maps.js"></script>
+
+  </body>
+</html>
