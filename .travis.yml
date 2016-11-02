@@ -10,4 +10,4 @@ deploy:
   domain: devenspace
   on:
     repo: code-4-fun/quakemap
-    branch: master
+    branch: development
