@@ -44,7 +44,7 @@ angular.module('mapModule')
         });
       });
 
-      loadData(mapService.DurationModes.daily, $scope);
+      loadData(mapService.DurationModes.hourly, $scope);
 
       function loadData(period, scope) {
         var responseData = [];

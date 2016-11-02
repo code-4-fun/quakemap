@@ -1,11 +1,12 @@
-
 language: node_js
 node_js:
-    - "0.10"
-
-deploy: 
-    provider: openshift
-    user: dev_nalawade@yahoo.com
-    password: Deven@1234
-    app: quakemap
-    deployment_branch: master
+- '0.10'
+deploy:
+  provider: openshift
+  user: dev_nalawade@yahoo.com
+  password: Deven@1234
+  app: quakemap
+  deployment_branch: develop
+env:
+  global:
+    secure: DF70mqFBciiIt49aibkmV8nBm+uKbkhBqv7dWm0ej70pD4n8m8ZtqN/Visy8fteiLRMlB8EUd9xuJ+c8jreC1N2Grbtt5hnd8bq+V79tAMoxcrl1vE0ukB+hY/AYOXjPgZI5Zyhfn9P7xe10oCXqZhsWgwuZujYyOr9bQF4+tZwOS9thOmAxYo/LNzpQSGWUBcs0HS5dc5n1JGXRAyL4NB3rEb9t9TX8qOuTHW+MXI1kv37EOKF6Ri7jnUGTBDvRTjxxPNGrwwiSMpdRxbqiNs7hsbdd0Tsu0IFTCh9NvMKrbaBAhL1OM14OES4ikdDwT8UAqh9PzQAjAF2I1oW72vp4nbOrjCFcFjkIyfLTk4taQiKnKnJm+SpYXDcg/d3EdMQcIonujdyJ0R+2CxOxwnhH9GmTXoVyzn3jQ1mkUTrh3sisZ4eqr4H0KIwAgU3nKuNh6lxzCyt6hbjGyZs++P80rX68x3A0tf/4t5GoZ+P3nBKIZ+2SABSstnAOI5JbCs91yT6/7dR5v72kquB3N8M3SSBQZ2gvgXGQ3zMTbwvyJeVdwdgYP4o0NP7jjpGvbr2iv+LmMIMGrEX6N9mtJON/F9vY7TvP8PlwhqBLS8NjShZuIJeQSqF2dA1zGr/dDl04wQCgD2IzIzi3iDdceVj5808TuXoQOLdVYTfhqXo=
