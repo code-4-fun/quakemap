@@ -4,7 +4,6 @@ node_js:
 deploy:
   provider: openshift
   user: dev_nalawade@yahoo.com
-  password: Deven@1234
   app: quakemap
   deployment_branch: develop
 env:
