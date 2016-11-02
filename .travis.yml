@@ -8,7 +8,6 @@ deploy:
     secure: kUkkXiy9WFrOo73duIkhr6JWJlTbEAZ2gdukhAZIRbnKBiYb1OAYV9aNwtlPjSOSo4QWvYsR1s9BB94cXJauPnlR5UkDIgrfbCWLU1mwsfYVXPjoKmdv36LUAlG6NJJAbEaFa94AL5s+SLiEmZgV1hQaR/8UZXwt6uKHUXBGYzqty2RGpxUbtdube7NuZ18/X14Ds0hVKSU1CxIJHfjCNH4Bv/BuHWxRoVo9oR/DuunxycQ0Bw1vjLhEVN4r+aBAky5revjnTXuw3b+HWx9dLffxnMAvFyHYf3zR1URDJRaHaRHTuGRYqgH8vd0li2CzW0abhChfvxDGfKnZL8drhm1uBIP1GGvrYSQ+EnZfRhOEpbBprkBCXvqQ+Jx/4ocQcsNz0ue/pDPzAEoypTxnX7N59yqYpqftzR8xUkkafHXN+leoyvTIQ/iKrjaDTvRSr/HlynLaDhpuJ65T/d7j4v4ufDdntLt5YorV/J3pWcoTMH3kSpMVhISJfxRmYXTnel/dZawLD9aLjAY2AkR+aBycQEU0jX6sH3IsGspY2WmjLWIG5niDLzGSUtrp72NxsG3l4XyioP2xtTYt6yqvuUcF5OsoOxryxiHXDt1G9lp4Xyule2y5PieTz5m/kJFSofha/nP8DeUdktPFTL+f5ZEP7NFOdr1p5HNfxBY6Tb0=
   app: quakemap
   domain: devenspace
-  deployment_branch: master
   on:
     repo: code-4-fun/quakemap
     branch: develop
